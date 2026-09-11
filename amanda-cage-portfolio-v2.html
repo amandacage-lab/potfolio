@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amanda Cagé — Audiovisual & Criação</title>
+<meta name="description" content="Amanda Cagé — vídeo, fotografia, design e comunicação.">
+
+<!--
+  ======================================================================
+  COMO EDITAR ESTE SITE
+  ======================================================================
+  1. Vá até "const CONFIG = {" no <script>, perto do fim do arquivo.
+  2. Troque ali: sua foto, os vídeos, as fotos, as artes e os links
+     de contato.
+  3. Para usar sua própria foto e imagens, coloque os arquivos numa
+     pasta "images/" ao lado deste HTML e ajuste os caminhos.
+  4. O texto "sobre" e a lista de experiências ficam na seção
+     <section id="sobre"> — pode editar o texto direto no HTML.
+  ======================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0c0a12;
+    --bg-soft: #150f1f;
+    --panel: #1a1526;
+    --ink: #f6f4f8;
+    --ink-dim: #948da3;
+    --line: #2a2338;
+    --violet: #a78bfa;
+    --violet-deep: #6d28d9;
+    --violet-glow: rgba(167,139,250,.16);
+    --ff-serif: 'Fraunces', serif;
+    --ff-body: 'Inter', sans-serif;
+    --edge: clamp(20px, 6vw, 72px);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--ff-body); font-size:16px; line-height:1.55;
+    overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--violet-deep); color:#fff; }
+  a{ color:inherit; } img{ max-width:100%; display:block; } button{ font-family:inherit; }
+
+  /* ---------- scroll progress ---------- */
+  .progress{
+    position:fixed; top:0; left:0; height:3px; background:var(--violet);
+    z-index:80; width:0%; transition:width .1s linear;
+  }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:60;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px var(--edge);
+  }
+  .nav .mark{
+    font-family:var(--ff-serif); font-weight:600; font-style:italic;
+    font-size:20px; text-decoration:none;
+  }
+  .nav-links{ display:none; gap:32px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ text-decoration:none; font-size:14px; color:var(--ink-dim); transition:color .2s ease; }
+  .nav-links a:hover{ color:var(--ink); }
+  @media (min-width:860px){ .nav-links{ display:flex; } }
+
+  .nav .toggle{
+    background:none; border:1px solid var(--line); color:var(--ink); cursor:pointer;
+    width:42px; height:42px; display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+  }
+  @media (min-width:860px){ .nav .toggle{ display:none; } }
+  .nav .toggle span{ display:block; width:16px; height:1px; background:currentColor; position:relative; }
+  .nav .toggle span::before, .nav .toggle span::after{
+    content:''; position:absolute; left:0; width:16px; height:1px; background:currentColor;
+  }
+  .nav .toggle span::before{ top:-5px; } .nav .toggle span::after{ top:5px; }
+
+  .panel{
+    position:fixed; top:0; right:0; bottom:0; width:min(84vw, 340px); z-index:65;
+    background:var(--panel); border-left:1px solid var(--line);
+    transform:translateX(100%); transition:transform .4s cubic-bezier(.65,0,.2,1);
+    display:flex; align-items:center; padding:0 40px;
+  }
+  .panel.open{ transform:translateX(0); }
+  .panel ul{ list-style:none; margin:0; padding:0; }
+  .panel li{ margin:.5em 0; }
+  .panel a{ text-decoration:none; font-family:var(--ff-serif); font-size:30px; color:var(--ink); }
+  .panel-close{
+    position:absolute; top:22px; right:var(--edge); background:none; border:none;
+    color:var(--ink); font-size:26px; cursor:pointer;
+  }
+  .scrim{
+    position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:64;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s .3s;
+  }
+  .scrim.open{ opacity:1; visibility:visible; transition:opacity .3s ease; }
+
+  /* ---------- hero: foto + nome ---------- */
+  .hero{
+    min-height:100svh; display:grid; align-items:stretch;
+    grid-template-columns:1fr; padding-top:88px;
+  }
+  @media (min-width:860px){
+    .hero{ grid-template-columns:1.05fr 1fr; padding-top:0; }
+  }
+  .hero-photo{
+    position:relative; overflow:hidden; min-height:46vh;
+    background:
+      radial-gradient(120% 100% at 30% 20%, rgba(167,139,250,.35), transparent 60%),
+      linear-gradient(165deg, #1b1428 0%, #0c0a12 78%);
+  }
+  .hero-photo img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:grayscale(35%) contrast(1.05);
+    mix-blend-mode:luminosity;
+    opacity:.9;
+  }
+  .hero-photo .tint{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(12,10,18,0) 40%, rgba(12,10,18,.9) 100%),
+               linear-gradient(90deg, rgba(109,40,217,.25), transparent 55%);
+  }
+  .hero-photo .ph{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:14px; color:#7a7290; text-align:center; padding:30px;
+  }
+  .hero-photo .ph svg{ width:56px; height:56px; opacity:.5; }
+  .hero-photo .ph strong{ font-family:var(--ff-serif); font-size:18px; color:#9f92bb; font-weight:500; }
+  .hero-photo .ph span{ font-size:12px; letter-spacing:.03em; }
+
+  .hero-copy{
+    position:relative; display:flex; flex-direction:column; justify-content:center;
+    padding:56px var(--edge) 72px;
+  }
+  .hero-copy .eyebrow{
+    font-size:13px; color:var(--violet); margin:0 0 18px; font-weight:500;
+  }
+  .hero-copy h1{
+    font-family:var(--ff-serif); font-weight:900; font-size:clamp(46px, 8.6vw, 96px);
+    line-height:.98; margin:0; letter-spacing:-.01em;
+  }
+  .hero-copy .role{
+    font-family:var(--ff-serif); font-style:italic; font-weight:500;
+    font-size:clamp(20px, 3vw, 26px); color:var(--ink-dim); margin:14px 0 0;
+  }
+  .hero-copy p.sub{
+    max-width:44ch; color:var(--ink-dim); margin:22px 0 0; font-size:15px;
+  }
+  .hero-cta{
+    margin-top:36px; display:inline-flex; align-items:center; gap:10px;
+    text-decoration:none; font-size:14px; font-weight:600; color:var(--ink);
+    padding-bottom:4px; border-bottom:1px solid var(--violet); width:fit-content;
+  }
+  .hero-cta .a{ transition:transform .25s ease; }
+  .hero-cta:hover .a{ transform:translateX(5px); }
+
+  /* ---------- section shell ---------- */
+  section.block{ padding:100px var(--edge); }
+  .block-head{ margin-bottom:52px; }
+  .block-head .num{ font-size:13px; color:var(--violet); font-weight:600; letter-spacing:.04em; }
+  .block-head h2{
+    font-family:var(--ff-serif); font-weight:700; font-size:clamp(38px,6.4vw,68px);
+    margin:8px 0 0; line-height:1;
+  }
+  .block-head p{ color:var(--ink-dim); max-width:40ch; margin:14px 0 0; font-size:15px; }
+
+  /* ---------- vídeos: linhas editoriais alternadas ---------- */
+  .work-row{
+    display:grid; gap:28px; grid-template-columns:1fr; align-items:center;
+    padding:40px 0; border-top:1px solid var(--line);
+    cursor:pointer;
+  }
+  .work-row:last-child{ border-bottom:1px solid var(--line); }
+  @media (min-width:860px){
+    .work-row{ grid-template-columns:1fr .85fr; gap:56px; }
+    .work-row.rev{ grid-template-columns:.85fr 1fr; }
+    .work-row.rev .work-media{ order:2; }
+    .work-row.rev .work-text{ order:1; }
+  }
+  .work-media{
+    position:relative; aspect-ratio:16/10; overflow:hidden; background:var(--bg-soft);
+    border:1px solid var(--line); transition:border-color .3s ease;
+  }
+  .work-row:hover .work-media{ border-color:var(--violet); }
+  .work-media img{ width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+  .work-row:hover .work-media img{ transform:scale(1.04); }
+  .work-media .ph{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:#635a78; font-size:12px; flex-direction:column; gap:6px; text-align:center; padding:20px;
+  }
+  .work-media .ph strong{ font-family:var(--ff-serif); font-size:20px; color:#8478a3; }
+  .work-play{
+    position:absolute; left:20px; bottom:20px; width:46px; height:46px; border-radius:50%;
+    background:rgba(12,10,18,.6); border:1px solid rgba(246,244,248,.4);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .work-row:hover .work-play{ background:var(--violet-deep); border-color:var(--violet-deep); transform:scale(1.08); }
+  .work-play svg{ width:14px; height:14px; fill:var(--ink); margin-left:2px; }
+  .work-index{ font-family:var(--ff-serif); font-style:italic; font-size:15px; color:var(--violet); }
+  .work-title{ font-family:var(--ff-serif); font-weight:700; font-size:clamp(24px,3.4vw,36px); margin:10px 0 6px; }
+  .work-role{ color:var(--ink-dim); font-size:14px; }
+
+  /* ---------- fotografia / design: colagem ---------- */
+  .collage{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .collage .tile{ position:relative; overflow:hidden; background:var(--bg-soft); border:1px solid var(--line); }
+  .collage .tile:nth-child(3n+1){ aspect-ratio:3/4; }
+  .collage .tile:nth-child(3n+2){ aspect-ratio:1/1; }
+  .collage .tile:nth-child(3n){ aspect-ratio:4/5; }
+  .collage .tile img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease, opacity .3s ease; }
+  .collage .tile:hover img{ transform:scale(1.06); }
+  .collage .tile .ph{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:#635a78; font-size:11px; text-align:center; padding:14px;
+  }
+  .collage .tile .overlay{
+    position:absolute; inset:0; background:linear-gradient(0deg, rgba(109,40,217,.55), transparent 60%);
+    opacity:0; transition:opacity .3s ease; display:flex; align-items:flex-end; padding:14px;
+    font-size:13px; font-weight:600;
+  }
+  .collage .tile:hover .overlay{ opacity:1; }
+  @media (min-width:640px){ .collage{ grid-template-columns:repeat(3,1fr); } }
+
+  /* ---------- sobre ---------- */
+  .sobre-grid{ display:grid; gap:52px; grid-template-columns:1fr; }
+  @media (min-width:860px){ .sobre-grid{ grid-template-columns:1fr 1fr; } }
+  .sobre-text p{ font-size:clamp(17px,2.2vw,20px); max-width:50ch; }
+  .sobre-text p em{ color:var(--violet); font-style:italic; }
+  .exp-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+  .exp-list li{
+    padding:18px 0; border-bottom:1px solid var(--line); position:relative; padding-left:18px;
+    transition:padding-left .25s ease;
+  }
+  .exp-list li::before{
+    content:''; position:absolute; left:0; top:24px; width:8px; height:1px; background:var(--line);
+    transition:background .25s ease, width .25s ease;
+  }
+  .exp-list li:hover{ padding-left:26px; }
+  .exp-list li:hover::before{ background:var(--violet); width:14px; }
+  .exp-list .org{ font-weight:600; font-size:15px; }
+  .exp-list .role{ color:var(--ink-dim); font-size:13px; margin-top:3px; }
+  .exp-list .when{ color:var(--violet); font-size:12px; margin-top:6px; }
+
+  /* ---------- contato ---------- */
+  .contato{
+    background:radial-gradient(140% 120% at 50% 0%, #1c1330 0%, #0c0a12 60%);
+    text-align:center;
+  }
+  .contato .block-head{ display:flex; flex-direction:column; align-items:center; }
+  .contato h2{ font-size:clamp(40px,9vw,88px); }
+  .contact-links{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:20px; }
+  .contact-links a{
+    text-decoration:none; font-family:var(--ff-serif); font-size:clamp(22px,4vw,34px);
+    font-weight:600; color:var(--ink); padding:10px 0; display:inline-flex; align-items:center; gap:10px;
+    transition:color .25s ease;
+  }
+  .contact-links a:hover{ color:var(--violet); }
+  .contact-links a .a{ opacity:0; transform:translateX(-6px); transition:opacity .25s ease, transform .25s ease; font-style:normal; }
+  .contact-links a:hover .a{ opacity:1; transform:translateX(0); }
+  .foot{
+    margin-top:64px; display:flex; justify-content:center; gap:18px; color:var(--ink-dim);
+    font-size:12px; flex-wrap:wrap;
+  }
+
+  /* ---------- lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:100; background:rgba(8,6,12,.94);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s .3s;
+  }
+  .lightbox.open{ opacity:1; visibility:visible; transition:opacity .3s ease; }
+  .lightbox-inner{ width:100%; max-width:920px; }
+  .lightbox-frame{ position:relative; width:100%; aspect-ratio:16/9; background:#000; }
+  .lightbox-frame iframe, .lightbox-frame video{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .lightbox-cap{ display:flex; justify-content:space-between; padding-top:14px; color:var(--ink-dim); font-size:13px; }
+  .lightbox-close{
+    position:absolute; top:22px; right:22px; background:none; border:none; color:var(--ink);
+    font-size:28px; cursor:pointer; line-height:1; padding:6px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition-duration:.001ms !important; animation-duration:.001ms !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="nav">
+  <a href="#top" class="mark">Amanda Cagé</a>
+  <ul class="nav-links">
+    <li><a href="#reel">Vídeos</a></li>
+    <li><a href="#fotografia">Fotografia</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="toggle" id="panelToggle" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<nav class="panel" id="panel">
+  <button class="panel-close" id="panelClose" aria-label="Fechar">&times;</button>
+  <ul>
+    <li><a href="#reel">Vídeos</a></li>
+    <li><a href="#fotografia">Fotografia</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO: só foto + nome -->
+<section class="hero" id="top">
+  <div class="hero-photo" id="heroPhoto"></div>
+  <div class="hero-copy">
+    <p class="eyebrow">Portfólio</p>
+    <h1>Amanda<br>Cagé</h1>
+    <p class="role">audiovisual, fotografia &amp; design</p>
+    <p class="sub">Começando uma carreira em cinema — contando histórias com imagem, vídeo e cuidado.</p>
+    <a href="#reel" class="hero-cta">ver os trabalhos <span class="a">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- VÍDEOS -->
+<section class="block" id="reel">
+  <div class="block-head">
+    <span class="num">01</span>
+    <h2>Vídeos</h2>
+    <p>Reel e produções recentes. Toque em qualquer linha para assistir.</p>
+  </div>
+  <div id="workRows"></div>
+</section>
+
+<!-- FOTOGRAFIA -->
+<section class="block" id="fotografia">
+  <div class="block-head">
+    <span class="num">02</span>
+    <h2>Fotografia</h2>
+    <p>Registros e ensaios.</p>
+  </div>
+  <div class="collage" id="photoGrid"></div>
+</section>
+
+<!-- DESIGN -->
+<section class="block" id="design">
+  <div class="block-head">
+    <span class="num">03</span>
+    <h2>Design</h2>
+    <p>Peças gráficas e identidade visual.</p>
+  </div>
+  <div class="collage" id="designGrid"></div>
+</section>
+
+<!-- SOBRE -->
+<section class="block" id="sobre">
+  <div class="block-head">
+    <span class="num">04</span>
+    <h2>Sobre</h2>
+  </div>
+  <div class="sobre-grid">
+    <div class="sobre-text">
+      <p>Estou começando minha carreira em <em>cinema e audiovisual</em>. Pelo caminho, já trabalhei com produção de conteúdo, fotografia, design e comunicação — em projetos de mídia, robótica, eventos e marcas. O que eu mais gosto de fazer é transformar uma ideia em imagem.</p>
+    </div>
+    <ul class="exp-list">
+      <li>
+        <div class="org">Manna Roosters 7033</div>
+        <div class="role">Marketing e produção de conteúdo</div>
+      </li>
+      <li>
+        <div class="org">Ministério de Mídia</div>
+        <div class="role">Produção e comunicação</div>
+        <div class="when">desde 2022</div>
+      </li>
+      <li>
+        <div class="org">First Lego Girls</div>
+        <div class="role">Embaixadora — SUBMERGED e Unearthed</div>
+        <div class="when">2024–2026</div>
+      </li>
+      <li>
+        <div class="org">Off-Season FRC — Porto Alegre</div>
+        <div class="role">Produção de conteúdo</div>
+      </li>
+      <li>
+        <div class="org">Ateliê Eliane Cagé</div>
+        <div class="role">Comunicação, administrativo e atendimento</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="block contato" id="contato">
+  <div class="block-head">
+    <span class="num">05</span>
+    <h2>Vamos criar?</h2>
+  </div>
+  <div class="contact-links" id="contactLinks"></div>
+  <div class="foot">
+    <span>Amanda Cagé © <span id="year"></span></span>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-frame" id="lightboxFrame"></div>
+    <div class="lightbox-cap">
+      <span id="lightboxTitle"></span>
+      <span id="lightboxRole"></span>
+    </div>
+  </div>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+</div>
+
+<script>
+/* ======================================================================
+   CONFIG — troque aqui sua foto, seus vídeos, fotos, artes e contatos.
+   ====================================================================== */
+const CONFIG = {
+
+  photo: { src: "" },  // ex: "images/amanda.jpg"
+
+  social: {
+    instagram:       "https://instagram.com/SEU_USUARIO",
+    instagramHandle: "@seu_usuario",
+    email:           "seuemail@exemplo.com",
+    whatsapp:        ""   // ex: "https://wa.me/55XXXXXXXXXXX" — vazio oculta
+  },
+
+  // type: "youtube" | "vimeo" | "file"
+  videos: [
+    { title:"Reel 2026", role:"Vídeo", type:"youtube", id:"", poster:"" },
+    { title:"Projeto 2", role:"Vídeo", type:"youtube", id:"", poster:"" },
+    { title:"Projeto 3", role:"Vídeo", type:"youtube", id:"", poster:"" },
+    { title:"Projeto 4", role:"Vídeo", type:"youtube", id:"", poster:"" }
+  ],
+
+  photos: [
+    { src:"", alt:"Foto 1" }, { src:"", alt:"Foto 2" }, { src:"", alt:"Foto 3" },
+    { src:"", alt:"Foto 4" }, { src:"", alt:"Foto 5" }, { src:"", alt:"Foto 6" }
+  ],
+
+  designs: [
+    { src:"", alt:"Design 1" }, { src:"", alt:"Design 2" },
+    { src:"", alt:"Design 3" }, { src:"", alt:"Design 4" }
+  ]
+};
+
+/* ====================================================================== */
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* --- scroll progress --- */
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = pct + '%';
+}, { passive:true });
+
+/* --- painel mobile --- */
+const panel = document.getElementById('panel');
+const scrim = document.getElementById('scrim');
+const panelToggle = document.getElementById('panelToggle');
+const panelClose = document.getElementById('panelClose');
+function openPanel(){ panel.classList.add('open'); scrim.classList.add('open'); panelToggle.setAttribute('aria-expanded','true'); }
+function closePanel(){ panel.classList.remove('open'); scrim.classList.remove('open'); panelToggle.setAttribute('aria-expanded','false'); }
+panelToggle.addEventListener('click', openPanel);
+panelClose.addEventListener('click', closePanel);
+scrim.addEventListener('click', closePanel);
+panel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closePanel));
+
+/* --- hero photo --- */
+(function buildHeroPhoto(){
+  const wrap = document.getElementById('heroPhoto');
+  if(CONFIG.photo.src){
+    const img = document.createElement('img');
+    img.src = CONFIG.photo.src; img.alt = 'Amanda Cagé';
+    wrap.appendChild(img);
+    const tint = document.createElement('div'); tint.className = 'tint';
+    wrap.appendChild(tint);
+  } else {
+    wrap.innerHTML = `<div class="ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      <strong>sua foto aqui</strong>
+      <span>troque em CONFIG.photo.src</span>
+    </div>`;
+  }
+})();
+
+/* --- vídeos: linhas alternadas --- */
+function buildWorkRows(){
+  const wrap = document.getElementById('workRows');
+  CONFIG.videos.forEach((v, i)=>{
+    const row = document.createElement('div');
+    row.className = 'work-row' + (i % 2 === 1 ? ' rev' : '');
+
+    const media = document.createElement('div');
+    media.className = 'work-media';
+    if(v.poster){
+      const img = document.createElement('img'); img.src = v.poster; img.alt = v.title;
+      media.appendChild(img);
+    } else {
+      media.innerHTML = `<div class="ph"><strong>THUMB ${i+1}</strong><span>coloque a capa do vídeo aqui</span></div>`;
+    }
+    const play = document.createElement('div'); play.className = 'work-play';
+    play.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 4l15 8-15 8z"/></svg>';
+    media.appendChild(play);
+
+    const text = document.createElement('div'); text.className = 'work-text';
+    text.innerHTML = `<div class="work-index">0${i+1}</div><div class="work-title">${v.title}</div><div class="work-role">${v.role}</div>`;
+
+    row.appendChild(media); row.appendChild(text);
+    row.addEventListener('click', ()=> openLightbox(v));
+    wrap.appendChild(row);
+  });
+}
+
+function buildCollage(containerId, items, label){
+  const grid = document.getElementById(containerId);
+  items.forEach((it, i)=>{
+    const tile = document.createElement('div'); tile.className = 'tile';
+    if(it.src){
+      const img = document.createElement('img'); img.src = it.src; img.alt = it.alt || '';
+      tile.appendChild(img);
+    } else {
+      tile.innerHTML = `<div class="ph"><strong>${label} ${i+1}</strong></div>`;
+    }
+    const overlay = document.createElement('div'); overlay.className = 'overlay';
+    overlay.textContent = it.alt || (label + ' ' + (i+1));
+    tile.appendChild(overlay);
+    grid.appendChild(tile);
+  });
+}
+
+buildWorkRows();
+buildCollage('photoGrid', CONFIG.photos, 'FOTO');
+buildCollage('designGrid', CONFIG.designs, 'PEÇA');
+
+/* --- contato --- */
+(function buildContact(){
+  const wrap = document.getElementById('contactLinks');
+  const items = [
+    { label:'Instagram', href: CONFIG.social.instagram },
+    { label:'E-mail', href: 'mailto:'+CONFIG.social.email }
+  ];
+  if(CONFIG.social.whatsapp){ items.push({ label:'WhatsApp', href: CONFIG.social.whatsapp }); }
+  items.forEach(it=>{
+    const a = document.createElement('a');
+    a.href = it.href; a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML = `${it.label} <span class="a">&rarr;</span>`;
+    wrap.appendChild(a);
+  });
+})();
+
+/* --- lightbox --- */
+const lightbox = document.getElementById('lightbox');
+const lbFrame = document.getElementById('lightboxFrame');
+const lbTitle = document.getElementById('lightboxTitle');
+const lbRole = document.getElementById('lightboxRole');
+
+function openLightbox(v){
+  lbFrame.innerHTML = '';
+  if(v.type === 'youtube' && v.id){
+    lbFrame.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${v.title}"></iframe>`;
+  } else if(v.type === 'vimeo' && v.id){
+    lbFrame.innerHTML = `<iframe src="https://player.vimeo.com/video/${v.id}?autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${v.title}"></iframe>`;
+  } else if(v.type === 'file' && v.src){
+    lbFrame.innerHTML = `<video src="${v.src}" controls autoplay playsinline></video>`;
+  } else {
+    lbFrame.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8a8399;font-size:14px;text-align:center;padding:20px;">Adicione o link ou arquivo deste vídeo no CONFIG</div>`;
+  }
+  lbTitle.textContent = v.title; lbRole.textContent = v.role;
+  lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lightbox.classList.remove('open'); lbFrame.innerHTML = ''; document.body.style.overflow = '';
+}
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e=>{ if(e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

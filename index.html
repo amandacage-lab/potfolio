@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amanda Cagé — Audiovisual & Criação</title>
+<meta name="description" content="Amanda Cagé — vídeo, fotografia, design e comunicação.">
+
+<!--
+  ======================================================================
+  COMO EDITAR ESTE SITE
+  ======================================================================
+  1. Vá até "const CONFIG = {" no <script>, perto do fim do arquivo.
+  2. Troque ali: sua foto, os vídeos, os reels, as fotos, as artes e os
+     links de contato.
+  3. Para usar sua própria foto e imagens, coloque os arquivos numa
+     pasta "images/" ao lado deste HTML e ajuste os caminhos.
+  4. O texto "sobre" e a lista de experiências ficam na seção
+     <section id="sobre"> — pode editar o texto direto no HTML.
+  ======================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="nav">
+  <a href="#top" class="mark">Amanda Cagé</a>
+  <ul class="nav-links">
+    <li><a href="#reel">Vídeos</a></li>
+    <li><a href="#fotografia">Fotografia</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="toggle" id="panelToggle" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<nav class="panel" id="panel">
+  <button class="panel-close" id="panelClose" aria-label="Fechar">&times;</button>
+  <ul>
+    <li><a href="#reel">Vídeos</a></li>
+    <li><a href="#fotografia">Fotografia</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO: só o nome -->
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="eyebrow">Portfólio</p>
+    <h1>Amanda<br>Cagé</h1>
+    <p class="role">audiovisual, fotografia e design</p>
+    <p class="sub">Começando uma carreira em cinema — contando histórias com imagem, vídeo e cuidado.</p>
+    <a href="#reel" class="hero-cta">ver os trabalhos <span class="a">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- VÍDEOS -->
+<section class="block" id="reel">
+  <div class="block-head">
+    <span class="num">01</span>
+    <h2>Vídeos</h2>
+    <p>Reel e produções recentes. Toque em qualquer linha para assistir.</p>
+  </div>
+  <div id="workRows"></div>
+  <div class="sub-head">
+    <h3>Reels</h3>
+    <p>Formato vertical, do jeito que roda no Instagram. Arraste para o lado.</p>
+  </div>
+  <div class="hscroll" id="reelsStrip"></div>
+</section>
+
+<!-- FOTOGRAFIA -->
+<section class="block" id="fotografia">
+  <div class="block-head">
+    <span class="num">02</span>
+    <h2>Fotografia</h2>
+    <p>Registros e ensaios. Arraste para o lado.</p>
+  </div>
+  <div class="hscroll" id="photoGrid"></div>
+</section>
+
+<!-- DESIGN -->
+<section class="block" id="design">
+  <div class="block-head">
+    <span class="num">03</span>
+    <h2>Design</h2>
+    <p>Peças gráficas e identidade visual. Arraste para o lado.</p>
+  </div>
+  <div class="hscroll" id="designGrid"></div>
+</section>
+
+<!-- SOBRE -->
+<section class="block" id="sobre">
+  <div class="block-head">
+    <span class="num">04</span>
+    <h2>Sobre</h2>
+  </div>
+  <div class="sobre-grid">
+    <div class="sobre-text">
+      <div class="sobre-mini">
+        <div class="sobre-photo" id="sobrePhoto"></div>
+        <p>Estou começando minha carreira em <em>cinema e audiovisual</em>, contando histórias com imagem e cuidado.</p>
+      </div>
+      <p>Pelo caminho, já trabalhei com produção de conteúdo, fotografia, design e comunicação — em projetos de mídia, robótica, eventos e marcas. O que eu mais gosto de fazer é transformar uma ideia em imagem.</p>
+    </div>
+    <ul class="exp-list">
+      <li>
+        <div class="org">Manna Roosters 7033</div>
+        <div class="role">Marketing e produção de conteúdo</div>
+      </li>
+      <li>
+        <div class="org">Ministério de Mídia</div>
+        <div class="role">Produção e comunicação</div>
+        <div class="when">desde 2022</div>
+      </li>
+      <li>
+        <div class="org">First Lego Girls</div>
+        <div class="role">Embaixadora — SUBMERGED e Unearthed</div>
+        <div class="when">2024–2026</div>
+      </li>
+      <li>
+        <div class="org">Off-Season FRC — Porto Alegre</div>
+        <div class="role">Produção de conteúdo</div>
+      </li>
+      <li>
+        <div class="org">Ateliê Eliane Cagé</div>
+        <div class="role">Comunicação, administrativo e atendimento</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="block contato" id="contato">
+  <div class="block-head">
+    <span class="num">05</span>
+    <h2>Vamos criar?</h2>
+  </div>
+  <div class="contact-links" id="contactLinks"></div>
+  <div class="foot">
+    <span>Amanda Cagé © <span id="year"></span></span>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-frame" id="lightboxFrame"></div>
+    <div class="lightbox-cap">
+      <span id="lightboxTitle"></span>
+      <span id="lightboxRole"></span>
+    </div>
+  </div>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+</div>
+
+<script>
+/* ======================================================================
+   CONFIG — troque aqui sua foto, seus vídeos, fotos, artes e contatos.
+   ====================================================================== */
+const CONFIG = {
+
+  photo: { src: "" },  // sua foto pequena na seção "Sobre" — ex: "images/amanda.jpg"
+
+  social: {
+    instagram:       "https://instagram.com/SEU_USUARIO",
+    instagramHandle: "@seu_usuario",
+    email:           "seuemail@exemplo.com",
+    whatsapp:        ""   // ex: "https://wa.me/55XXXXXXXXXXX" — vazio oculta
+  },
+
+  // type: "youtube" | "vimeo" | "file"
+  videos: [
+    { title:"Reel 2026", role:"Vídeo", type:"youtube", id:"", poster:"" },
+    { title:"Projeto 2", role:"Vídeo", type:"youtube", id:"", poster:"" },
+    { title:"Projeto 3", role:"Vídeo", type:"youtube", id:"", poster:"" },
+    { title:"Projeto 4", role:"Vídeo", type:"youtube", id:"", poster:"" }
+  ],
+
+  // vídeos verticais / reels — type: "instagram" (cole o link do reel) | "youtube" | "vimeo" | "file"
+  reels: [
+    { title:"Reel", role:"Instagram", type:"instagram", url:"", poster:"" },
+    { title:"Reel", role:"Instagram", type:"instagram", url:"", poster:"" },
+    { title:"Reel", role:"Instagram", type:"instagram", url:"", poster:"" },
+    { title:"Reel", role:"Instagram", type:"instagram", url:"", poster:"" }
+  ],
+
+  photos: [
+    { src:"", alt:"Foto 1" }, { src:"", alt:"Foto 2" }, { src:"", alt:"Foto 3" },
+    { src:"", alt:"Foto 4" }, { src:"", alt:"Foto 5" }, { src:"", alt:"Foto 6" }
+  ],
+
+  designs: [
+    { src:"", alt:"Design 1" }, { src:"", alt:"Design 2" },
+    { src:"", alt:"Design 3" }, { src:"", alt:"Design 4" }
+  ]
+};
+
+/* ====================================================================== */
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* --- scroll progress --- */
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = pct + '%';
+}, { passive:true });
+
+/* --- painel mobile --- */
+const panel = document.getElementById('panel');
+const scrim = document.getElementById('scrim');
+const panelToggle = document.getElementById('panelToggle');
+const panelClose = document.getElementById('panelClose');
+function openPanel(){ panel.classList.add('open'); scrim.classList.add('open'); panelToggle.setAttribute('aria-expanded','true'); }
+function closePanel(){ panel.classList.remove('open'); scrim.classList.remove('open'); panelToggle.setAttribute('aria-expanded','false'); }
+panelToggle.addEventListener('click', openPanel);
+panelClose.addEventListener('click', closePanel);
+scrim.addEventListener('click', closePanel);
+panel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closePanel));
+
+/* --- foto pequena (seção Sobre) --- */
+(function buildSobrePhoto(){
+  const wrap = document.getElementById('sobrePhoto');
+  if(CONFIG.photo.src){
+    const img = document.createElement('img');
+    img.src = CONFIG.photo.src; img.alt = 'Amanda Cagé';
+    wrap.appendChild(img);
+  } else {
+    wrap.innerHTML = `<div class="ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </div>`;
+  }
+})();
+
+/* --- vídeos: linhas alternadas --- */
+function buildWorkRows(){
+  const wrap = document.getElementById('workRows');
+  CONFIG.videos.forEach((v, i)=>{
+    const row = document.createElement('div');
+    row.className = 'work-row' + (i % 2 === 1 ? ' rev' : '');
+
+    const media = document.createElement('div');
+    media.className = 'work-media';
+    if(v.poster){
+      const img = document.createElement('img'); img.src = v.poster; img.alt = v.title;
+      media.appendChild(img);
+    } else {
+      media.innerHTML = `<div class="ph"><strong>THUMB ${i+1}</strong><span>coloque a capa do vídeo aqui</span></div>`;
+    }
+    const play = document.createElement('div'); play.className = 'work-play';
+    play.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 4l15 8-15 8z"/></svg>';
+    media.appendChild(play);
+
+    const text = document.createElement('div'); text.className = 'work-text';
+    text.innerHTML = `<div class="work-index">0${i+1}</div><div class="work-title">${v.title}</div><div class="work-role">${v.role}</div>`;
+
+    row.appendChild(media); row.appendChild(text);
+    row.addEventListener('click', ()=> openLightbox(v));
+    wrap.appendChild(row);
+  });
+}
+
+function buildCollage(containerId, items, label){
+  const grid = document.getElementById(containerId);
+  items.forEach((it, i)=>{
+    const tile = document.createElement('div'); tile.className = 'tile';
+    if(it.src){
+      const img = document.createElement('img'); img.src = it.src; img.alt = it.alt || '';
+      tile.appendChild(img);
+    } else {
+      tile.innerHTML = `<div class="ph"><strong>${label} ${i+1}</strong></div>`;
+    }
+    const overlay = document.createElement('div'); overlay.className = 'overlay';
+    overlay.textContent = it.alt || (label + ' ' + (i+1));
+    tile.appendChild(overlay);
+    grid.appendChild(tile);
+  });
+}
+
+function buildReels(){
+  const grid = document.getElementById('reelsStrip');
+  CONFIG.reels.forEach((r, i)=>{
+    const tile = document.createElement('div'); tile.className = 'tile reel-tile';
+    if(r.poster){
+      const img = document.createElement('img'); img.src = r.poster; img.alt = r.title;
+      tile.appendChild(img);
+    } else {
+      tile.innerHTML = `<div class="ph"><strong>REEL ${i+1}</strong></div>`;
+    }
+    const tag = document.createElement('span'); tag.className = 'reel-tag'; tag.textContent = r.role || 'Reel';
+    tile.appendChild(tag);
+    const play = document.createElement('div'); play.className = 'reel-play';
+    play.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 4l15 8-15 8z"/></svg>';
+    tile.appendChild(play);
+    tile.addEventListener('click', ()=> openLightbox(r));
+    grid.appendChild(tile);
+  });
+}
+
+/* arrastar com o mouse nos carrosséis (o toque já funciona nativamente) */
+function enableDragScroll(el){
+  let isDown = false, startX, startScroll, moved;
+  el.addEventListener('pointerdown', e=>{
+    isDown = true; moved = false; el.classList.add('dragging');
+    startX = e.clientX; startScroll = el.scrollLeft;
+  });
+  window.addEventListener('pointerup', ()=>{ isDown = false; el.classList.remove('dragging'); });
+  el.addEventListener('pointerleave', ()=>{ isDown = false; el.classList.remove('dragging'); });
+  el.addEventListener('pointermove', e=>{
+    if(!isDown) return;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 4) moved = true;
+    el.scrollLeft = startScroll - dx;
+  });
+  el.addEventListener('click', e=>{ if(moved){ e.preventDefault(); e.stopPropagation(); } }, true);
+}
+
+buildWorkRows();
+buildReels();
+buildCollage('photoGrid', CONFIG.photos, 'FOTO');
+buildCollage('designGrid', CONFIG.designs, 'PEÇA');
+document.querySelectorAll('.hscroll').forEach(enableDragScroll);
+
+/* --- contato --- */
+(function buildContact(){
+  const wrap = document.getElementById('contactLinks');
+  const items = [
+    { label:'Instagram', href: CONFIG.social.instagram },
+    { label:'E-mail', href: 'mailto:'+CONFIG.social.email }
+  ];
+  if(CONFIG.social.whatsapp){ items.push({ label:'WhatsApp', href: CONFIG.social.whatsapp }); }
+  items.forEach(it=>{
+    const a = document.createElement('a');
+    a.href = it.href; a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML = `${it.label} <span class="a">&rarr;</span>`;
+    wrap.appendChild(a);
+  });
+})();
+
+/* --- lightbox --- */
+const lightbox = document.getElementById('lightbox');
+const lbFrame = document.getElementById('lightboxFrame');
+const lbTitle = document.getElementById('lightboxTitle');
+const lbRole = document.getElementById('lightboxRole');
+
+function openLightbox(v){
+  lbFrame.innerHTML = '';
+  lbFrame.classList.remove('vertical', 'insta');
+
+  if(v.type === 'instagram' && v.url){
+    lbFrame.classList.add('insta');
+    lbFrame.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${v.url}" data-instgrm-version="14" style="margin:0;width:100%;"></blockquote>`;
+    if(window.instgrm){
+      window.instgrm.Embeds.process();
+    } else {
+      const s = document.createElement('script');
+      s.src = 'https://www.instagram.com/embed.js'; s.async = true;
+      document.body.appendChild(s);
+    }
+  } else if(v.type === 'youtube' && v.id){
+    if(v.role && /reel|insta/i.test(v.role)) lbFrame.classList.add('vertical');
+    lbFrame.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${v.title}"></iframe>`;
+  } else if(v.type === 'vimeo' && v.id){
+    if(v.role && /reel|insta/i.test(v.role)) lbFrame.classList.add('vertical');
+    lbFrame.innerHTML = `<iframe src="https://player.vimeo.com/video/${v.id}?autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${v.title}"></iframe>`;
+  } else if(v.type === 'file' && v.src){
+    if(v.role && /reel|insta/i.test(v.role)) lbFrame.classList.add('vertical');
+    lbFrame.innerHTML = `<video src="${v.src}" controls autoplay playsinline></video>`;
+  } else {
+    lbFrame.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8a8399;font-size:14px;text-align:center;padding:20px;">Adicione o link ou arquivo deste vídeo no CONFIG</div>`;
+  }
+  lbTitle.textContent = v.title; lbRole.textContent = v.role;
+  lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lightbox.classList.remove('open'); lbFrame.innerHTML = ''; document.body.style.overflow = '';
+}
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e=>{ if(e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
