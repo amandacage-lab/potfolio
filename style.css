@@ -132,12 +132,6 @@
   .block-head p{ color:var(--ink-dim); max-width:40ch; margin:14px 0 0; font-size:15px; }
 
 /* ---------- vídeos: carrossel horizontal ---------- */
-.work-row{
-  position:relative;
-  flex:0 0 auto;
-  width:min(78vw, 520px);
-  cursor:pointer;
-}
 
 #workRows{
   display:flex;
@@ -163,9 +157,17 @@
   background:var(--line);
 }
 
+/* ---------- card do vídeo ---------- */
+
 .work-row{
+  position:relative;
+  flex:0 0 auto;
+  width:min(78vw, 520px);
   scroll-snap-align:start;
+  cursor:pointer;
 }
+
+/* ---------- capa ---------- */
 
 .work-media{
   position:relative;
@@ -193,6 +195,8 @@
   transform:scale(1.04);
 }
 
+/* ---------- placeholder ---------- */
+
 .work-media .ph{
   position:absolute;
   inset:0;
@@ -214,6 +218,8 @@
   color:#8478a3;
 }
 
+/* ---------- botão play ---------- */
+
 .work-play{
   position:absolute;
   left:18px;
@@ -226,7 +232,10 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  transition:background .25s ease, border-color .25s ease, transform .25s ease;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
 }
 
 .work-row:hover .work-play{
@@ -241,6 +250,8 @@
   fill:var(--ink);
   margin-left:2px;
 }
+
+/* ---------- informações ---------- */
 
 .work-text{
   padding:14px 2px 0;
@@ -265,7 +276,6 @@
   font-size:12px;
   margin-top:3px;
 }
-
 /* remove o efeito de alternância dos vídeos */
 .work-row.rev{
   grid-template-columns:none;
